@@ -6,78 +6,79 @@
 [![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/github/license/eGroupAI/document-prep-starter?style=for-the-badge)](./LICENSE)
 
-> 把文件快速轉成可下游使用的標準化 JSONL。  
-> **重點是可直接引用，不是概念計畫。**
+> 把 `.md` / `.txt` 轉成帶 `doc_id` + `chunk_id` 的 JSONL，
+> 方便直接接進批次處理或後續 pipeline。
 
 ---
 
-## 一分鐘看懂價值
-
-- 把純文字或 markdown 轉為結構化 chunks
-- CLI 與 Python API 都能直接接入
-- 有測試與 CI，可快速落地
-
-![Quickstart Preview](./assets/quickstart-preview.svg)
-
----
-
-## 30 秒快速引用
+## 安裝
 
 ```bash
 python -m venv .venv
-. .venv/bin/activate  # Windows: .venv\Scripts\activate
+# macOS / Linux
+. .venv/bin/activate
+# Windows
+.venv\Scripts\activate
+
 pip install -e .[dev]
+```
+
+---
+
+## 執行
+
+```bash
+# 轉換
 mdprep ingest --input ./examples/demo.md --output ./out/demo.jsonl --doc-id demo-001
+
+# 驗證輸出格式
 mdprep validate --input ./out/demo.jsonl
 ```
 
 ---
 
-## 你可以直接用在
-
-- 文件批次清洗與結構化
-- 內部知識整理前置步驟
-- 檢索流程的 ingestion baseline
-
----
-
-## 輸入 / 輸出示例
-
-```text
-input:  examples/demo.md
-output: out/demo.jsonl
-```
+## 輸出長這樣
 
 ```json
 {"doc_id":"demo-001","chunk_id":"demo-0001","text":"# Demo","metadata":{"source":"public-starter-kit","char_length":6}}
 {"doc_id":"demo-001","chunk_id":"demo-0002","text":"這是一份公開示範資料。","metadata":{"source":"public-starter-kit","char_length":11}}
 ```
 
+每行一筆，欄位固定：`doc_id` / `chunk_id` / `text` / `metadata`。
+
 ---
 
-## Python API
+## 如果你要在 Python 裡用
 
 ```python
 from markitdown_prep.core import build_chunks, emit_jsonl
 
-text = "# Hello\n\nThis is a sample."
-chunks = build_chunks(text=text, doc_id="sample-001")
+chunks = build_chunks(text="# Hello\n\nThis is a sample.", doc_id="sample-001")
 emit_jsonl(chunks, "out.jsonl")
 ```
 
 ---
 
-## 安全邊界
+## 適合這些情境
 
-本 repo 不包含真實資料、業務流程、業務決策規則與內部實作細節。  
-詳見 `docs/threat-model.md`。
+- 批次轉換多份文件，輸出統一格式供下游消費
+- 自建 ingestion 流程時需要一個有測試的基線
+- 只需要拆段 + 標準欄位，不需要額外 dependency
 
 ---
 
-## 開發與測試
+## 不包含
+
+- 真實資料與私有欄位定義
+- 任何業務規則、決策邏輯、Prompt
+
+詳見 [`docs/threat-model.md`](./docs/threat-model.md)。
+
+---
+
+## 開發
 
 ```bash
-python scripts/keyword_guard.py
 pytest -q
 ```
 
@@ -85,4 +86,4 @@ pytest -q
 
 ## 授權
 
-MIT License，詳見 `LICENSE`。
+MIT License，詳見 [`LICENSE`](./LICENSE)。
