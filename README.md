@@ -4,7 +4,8 @@
 
 [![CI](https://img.shields.io/github/actions/workflow/status/eGroupAI/document-prep-starter/ci.yml?branch=main&style=for-the-badge)](../../actions)
 [![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/downloads/)
-[![License](https://img.shields.io/github/license/eGroupAI/document-prep-starter?style=for-the-badge)](./LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen?style=for-the-badge)](./LICENSE)
+[![Free & Open Source](https://img.shields.io/badge/Free%20%26%20Open%20Source-%E2%9C%93-brightgreen?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
 > 把 `.md` / `.txt` 轉成帶 `doc_id` + `chunk_id` 的 JSONL，
 > 方便直接接進批次處理或後續 pipeline。
@@ -86,7 +87,18 @@ pytest -q
 
 ## 授權
 
-本專案採 [MIT License](./LICENSE) 授權。
+本專案採 **[MIT License](./LICENSE)** 授權，**永久免費、可商業使用、可修改、可散佈**。
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen?style=flat-square)](https://opensource.org/licenses/MIT)
+[![Free & Open Source](https://img.shields.io/badge/Free%20%26%20Open%20Source-%E2%9C%93-brightgreen?style=flat-square)](https://opensource.org/licenses/MIT)
+
+| 權利 | 說明 |
+| --- | --- |
+| ✅ 免費使用 | 個人、商業、學術皆可，不收費 |
+| ✅ 可修改 | 可依需求自由調整原始碼 |
+| ✅ 可散佈 | 可重新散佈原始或修改版本 |
+| ✅ 可商業使用 | 可用於商業產品中 |
+| ℹ️ 保留聲明 | 散佈時需保留原始版權與授權聲明 |
 
 版權所有 © 2026 [eGroupAI 益群健康資訊](https://www.egroupai.com/zh-TW)
 
