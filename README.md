@@ -1,14 +1,23 @@
-# document-prep-starter
+<div align="center">
 
-![Banner](./assets/banner.svg)
+<img src="./assets/banner.svg" width="100%" alt="document-prep-starter"/>
 
-[![CI](https://img.shields.io/github/actions/workflow/status/eGroupAI/document-prep-starter/ci.yml?branch=main&style=for-the-badge)](../../actions)
-[![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/downloads/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen?style=for-the-badge)](./LICENSE)
+<br/>
+
+[![CI](https://img.shields.io/github/actions/workflow/status/eGroupAI/document-prep-starter/ci.yml?branch=main&style=for-the-badge&label=CI)](../../actions)&nbsp;
+[![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/downloads/)&nbsp;
+[![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen?style=for-the-badge)](./LICENSE)&nbsp;
 [![Free & Open Source](https://img.shields.io/badge/Free%20%26%20Open%20Source-%E2%9C%93-brightgreen?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
-> 把 `.md` / `.txt` 轉成帶 `doc_id` + `chunk_id` 的 JSONL，
-> 方便直接接進批次處理或後續 pipeline。
+<br/>
+
+**把 `.md` / `.txt` 轉成帶 `chunk_id` 的 JSONL，方便直接接進批次處理或後續 pipeline。**
+
+<br/>
+
+[安裝](#安裝) &nbsp;·&nbsp; [執行](#執行) &nbsp;·&nbsp; [輸出格式](#輸出格式) &nbsp;·&nbsp; [Python API](#python-api) &nbsp;·&nbsp; [授權](#授權)
+
+</div>
 
 ---
 
@@ -16,11 +25,7 @@
 
 ```bash
 python -m venv .venv
-# macOS / Linux
-. .venv/bin/activate
-# Windows
-.venv\Scripts\activate
-
+. .venv/bin/activate          # Windows: .venv\Scripts\activate
 pip install -e .[dev]
 ```
 
@@ -29,7 +34,7 @@ pip install -e .[dev]
 ## 執行
 
 ```bash
-# 轉換
+# 轉換文件
 mdprep ingest --input ./examples/demo.md --output ./out/demo.jsonl --doc-id demo-001
 
 # 驗證輸出格式
@@ -38,18 +43,18 @@ mdprep validate --input ./out/demo.jsonl
 
 ---
 
-## 輸出長這樣
+## 輸出格式
+
+每行一筆 JSONL，欄位固定：
 
 ```json
 {"doc_id":"demo-001","chunk_id":"demo-0001","text":"# Demo","metadata":{"source":"public-starter-kit","char_length":6}}
 {"doc_id":"demo-001","chunk_id":"demo-0002","text":"這是一份公開示範資料。","metadata":{"source":"public-starter-kit","char_length":11}}
 ```
 
-每行一筆，欄位固定：`doc_id` / `chunk_id` / `text` / `metadata`。
-
 ---
 
-## 如果你要在 Python 裡用
+## Python API
 
 ```python
 from markitdown_prep.core import build_chunks, emit_jsonl
